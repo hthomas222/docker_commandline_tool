@@ -41,7 +41,7 @@ def docker_start():
     else:
         print(docker.stderr)
     start = input("Enter a container id to start: ")
-    docker_start = subprocess.run(['docker', 'start', start], capture_output=True, text=True)
+    subprocess.run(['docker', 'start', start], capture_output=True, text=True)
 
 def docker_stop():
     docker = subprocess.run(['docker', 'ps', '-a'], capture_output=True, text=True)
@@ -50,7 +50,7 @@ def docker_stop():
     else:
         print(docker.stderr)
     stop = input("Enter a container id to stop: ")
-    docker_stop = subprocess.run(['docker', 'stop', stop], capture_output=True, text=True)
+    subprocess.run(['docker', 'stop', stop], capture_output=True, text=True)
 
 def check(test):
     if test == "2":
