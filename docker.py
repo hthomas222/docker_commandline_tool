@@ -34,7 +34,23 @@ def docker_system_df():
     else:
         print(docker.stderr)
 
+def docker_start():
+    docker = subprocess.run(['docker', 'ps', '-a'], capture_output=True, text=True)
+    if docker.returncode == 0:
+        print(docker.stdout)
+    else:
+        print(docker.stderr)
+    start = input("Enter a container id to start: ")
+    docker_start = subprocess.run(['docker', 'start', start], capture_output=True, text=True)
 
+def docker_stop():
+    docker = subprocess.run(['docker', 'ps', '-a'], capture_output=True, text=True)
+    if docker.returncode == 0:
+        print(docker.stdout)
+    else:
+        print(docker.stderr)
+    stop = input("Enter a container id to stop: ")
+    docker_stop = subprocess.run(['docker', 'stop', stop], capture_output=True, text=True)
 
 def check(test):
     if test == "2":
@@ -61,7 +77,9 @@ while test != "1":
     table.add_row("1", "docker_ps", "This command will list all of the current running containers.")
     table.add_row("2", "docker_images", "This command will list all of the images.")
     table.add_row("3", "docker_system_info", "This command will show the information of the docker install")
-    table.add_row("4", "Get_Info", "This command will show the disk space used for the docker build.")
+    table.add_row("4", "docker_df", "This command will show the disk space used for the docker build.")
+    table.add_row("5", "docker_start", "This command will start a container for you.")
+    table.add_row("6", "docker_stop", "This command will stop a container for you.")
     console = Console()
     console.print(table)
     print()
@@ -80,6 +98,14 @@ while test != "1":
         print()
         docker_system_df()
         print()
+    elif selection == "5":
+        print()
+        docker_start()
+        print()
+    elif selection == "6":
+        print()
+        docker_stop()
+        print()
     else:
         console.log("[bold red]Please enter a valid choice!")
     print()
@@ -88,4 +114,3 @@ while test != "1":
         x = check(test)
         if x == "1":
             sys.exit()
-
